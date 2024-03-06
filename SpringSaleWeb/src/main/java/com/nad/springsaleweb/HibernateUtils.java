@@ -6,6 +6,7 @@ package com.nad.springsaleweb;
 
 import com.nad.pojo.Category;
 import com.nad.pojo.Product;
+import com.nad.pojo.Tag;
 import java.util.Properties;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -23,16 +24,17 @@ public class HibernateUtils {
     static {
         Configuration conf = new Configuration();
         Properties props = new Properties();
-//        props.setProperty(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-//        props.setProperty(Environment.URL, "jdbc:mysql://localhost/saledb");
-//        props.setProperty(Environment.USER, "root");
-//        props.setProperty(Environment.PASS, "Admin@123");
-//        props.setProperty(Environment.SHOW_SQL, "true");
-//        conf.setProperties(props);
-        conf.configure("hibernate.cfg.xml");
+        props.setProperty(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
+        props.setProperty(Environment.URL, "jdbc:mysql://localhost/saledb");
+        props.setProperty(Environment.USER, "root");
+        props.setProperty(Environment.PASS, "Admin@123");
+        props.setProperty(Environment.SHOW_SQL, "true");
+        conf.setProperties(props);
+//        conf.configure("hibernate.cfg.xml");
         
         conf.addAnnotatedClass(Category.class);
         conf.addAnnotatedClass(Product.class);
+        conf.addAnnotatedClass(Tag.class);
         
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties())

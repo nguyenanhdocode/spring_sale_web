@@ -7,6 +7,7 @@ package com.nad.springsaleweb;
 
 import com.nad.pojo.Category;
 import com.nad.pojo.Product;
+import com.nad.pojo.Tag;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.Query;
@@ -20,12 +21,10 @@ public class SpringSaleWeb {
 
     public static void main(String[] args) {
         try(Session session = HibernateUtils.getFactory().openSession()) {
-            Category c = session.get(Category.class, 2);
-            Set<Product> products = c.getProducts();
-            
+            Tag t = session.get(Tag.class, 1);
+            Set<Product> products = t.getProducts();
             products.forEach(p -> {
-                System.out.printf("%d - %s - %s\n",
-                        p.getId(), p.getName(), p.getPrice());
+                System.out.printf("%d - %s\n", p.getId(), p.getName());
             });
         }
     }
