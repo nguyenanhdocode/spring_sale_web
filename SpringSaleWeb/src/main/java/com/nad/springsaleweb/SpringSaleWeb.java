@@ -8,7 +8,10 @@ package com.nad.springsaleweb;
 import com.nad.pojo.Category;
 import com.nad.pojo.Product;
 import com.nad.pojo.Tag;
+import com.nad.repositoryimpl.ProductRepoImpl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.persistence.Query;
 import org.hibernate.Session;
@@ -20,12 +23,20 @@ import org.hibernate.Session;
 public class SpringSaleWeb {
 
     public static void main(String[] args) {
-        try(Session session = HibernateUtils.getFactory().openSession()) {
-            Tag t = session.get(Tag.class, 1);
-            Set<Product> products = t.getProducts();
-            products.forEach(p -> {
-                System.out.printf("%d - %s\n", p.getId(), p.getName());
-            });
-        }
+//        try(Session session = HibernateUtils.getFactory().openSession()) {
+//            Tag t = session.get(Tag.class, 1);
+//            Set<Product> products = t.getProducts();
+//            products.forEach(p -> {
+//                System.out.printf("%d - %s\n", p.getId(), p.getName());
+//            });
+//        }
+
+        ProductRepoImpl repo = new ProductRepoImpl();
+        Map<String, String> params = new HashMap<>();
+        params.put("kw", "iPhone");
+        params.put("fromPrice", "20000000");
+        params.put("toPrice", "30000000");
+        repo.getAll(params).forEach(p -> System.out.printf("%d - %s - %f\n",
+                p.getId(), p.getName(), p.getPrice()));
     }
 }
