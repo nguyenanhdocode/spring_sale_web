@@ -47,7 +47,6 @@ public class ProductRepoImpl {
                 predicates.add(builder.between(root.get("price"), Double.parseDouble(fromPrice)
                         , Double.parseDouble(toPrice)));
             
-            
             query.where(predicates.toArray(Predicate[]::new));
             
             Query q = session.createQuery(query);
